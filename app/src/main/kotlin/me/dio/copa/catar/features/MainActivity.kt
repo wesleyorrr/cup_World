@@ -1,6 +1,8 @@
 package me.dio.copa.catar.features
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -30,8 +32,32 @@ class MainActivity : ComponentActivity() {
     private fun observeActions() {
         viewModel.action.observe(this) { action ->
             when (action) {
-                is MainUiAction.MatchesNotFound -> TODO()
-                MainUiAction.Unexpected -> TODO()
+                is MainUiAction.MatchesNotFound -> {
+                    val alertDialog = AlertDialog.Builder(this)
+                        .setTitle("Nenhum jogo encontrado")
+                        .setMessage("Não foram encontrados jogos correspondentes.")
+                        .setPositiveButton("OK") { dialog, _ ->
+                            dialog.dismiss()
+                        }
+                        .create()
+
+                    alertDialog.show()
+                    }
+
+                MainUiAction.Unexpected -> {
+                    val alertDialog = AlertDialog.Builder(this)
+                        .setTitle("Erro inesperado")
+                        .setMessage("Ocorreu um erro inesperado.")
+                        .setPositiveButton("OK") { dialog, _ ->
+                            dialog.dismiss()
+                        }
+                        .create()
+
+                    alertDialog.show()
+
+                    // Você também pode considerar adicionar logs para depuração.
+                    Log.e("MainActivity", "Ops.. ocorreu um erro.")
+                }
                 is MainUiAction.DisableNotification ->
                     NotificationMatcherWorker.cancel(applicationContext, action.match)
                 is MainUiAction.EnableNotification ->
