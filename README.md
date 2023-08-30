@@ -27,5 +27,5 @@ App Android que simula partidas da copa do mundo.
 ## Imagens do Projeto
 
 <h1 align="center">
-   <img src="" height="425" />
+   <img src="https://github.com/wesleyorrr/cup_World/blob/main/img_project.jpg" height="425" />
 </h1>
